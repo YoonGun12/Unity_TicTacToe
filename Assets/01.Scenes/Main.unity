@@ -1403,6 +1403,8 @@ MonoBehaviour:
   jumpHeight: 100
   duration: 0.5
   delayBetweenLetters: 0.1
+  OImage: {fileID: 389754076}
+  XImage: {fileID: 402324762}
 --- !u!224 &6912047592786556850
 RectTransform:
   m_ObjectHideFlags: 0

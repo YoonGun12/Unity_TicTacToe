@@ -26,6 +26,7 @@ public class MainPanelController : MonoBehaviour
 
         textInfo = titleText.textInfo;
         StartCoroutine(AnimateJumpingText());
+        StartCoroutine(AnimateIcons());
     }
 
     IEnumerator AnimateJumpingText()
@@ -86,8 +87,34 @@ public class MainPanelController : MonoBehaviour
 
                 yield return new WaitForSeconds(delayBetweenLetters);
             }
+
             
             yield return new WaitForSeconds(1f); // 한 번 끝난 후 다시 실행할 때 대기 시간
+        }
+    }
+    
+    IEnumerator AnimateIcons()
+    {
+        Vector3 O_startPos = OImage.rectTransform.anchoredPosition;
+        Vector3 X_startPos = XImage.rectTransform.anchoredPosition;
+
+        Vector3 centerPos = new Vector3(0, 0, 0);
+        float moveDuration = 0.5f; // 이동 시간
+        float waitTime = 0.2f;     // 충돌 후 머무는 시간
+
+        while (true)
+        {
+            // 중앙으로 이동
+            OImage.rectTransform.DOAnchorPos(centerPos, moveDuration).SetEase(Ease.InOutBack);
+            XImage.rectTransform.DOAnchorPos(centerPos, moveDuration).SetEase(Ease.InOutBack);
+
+            yield return new WaitForSeconds(moveDuration + waitTime);
+
+            // 다시 원래 위치로 돌아감
+            OImage.rectTransform.DOAnchorPos(O_startPos, moveDuration).SetEase(Ease.InOutBack);
+            XImage.rectTransform.DOAnchorPos(X_startPos, moveDuration).SetEase(Ease.InOutBack);
+
+            yield return new WaitForSeconds(moveDuration + 1f); // 반복을 위한 대기 시간
         }
     }
     

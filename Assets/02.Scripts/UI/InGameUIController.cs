@@ -58,7 +58,7 @@ public class InGameUIController : PanelController
 
     public void OnClickGameOverButton()
     {
-        GameManager.Instance.OpenConfirmPanel("게임을 종료하시겠습니까?", () =>
+        GameManager.Instance.OpenConfirmPanel("메인화면으로 돌아가시겠습니까?", () =>
         {
             GameManager.Instance.ChangeToMainScene();
         });
