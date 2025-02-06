@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : K_Singleton<GameManager>
 {
+   [SerializeField] private GameObject settingsPanel;
+   [SerializeField] private GameObject confirmPanel;
+   
    private BlockController _blockController;
    private InGameUIController _inGameUIController;
 
@@ -22,19 +26,29 @@ public class GameManager : K_Singleton<GameManager>
       Lose, //플레이어 패
       Draw //비김
    }
-  
-  
-   private void Start()
-   {
-      //게임 초기화
-      InitGame();
-   }
 
+   public enum GameType{SinglePlayer, DualPlayer}
+   
+   public void ChangeToGameScene(GameType gameType)
+   {
+      SceneManager.LoadScene("Game");
+   }
+   
    /// <summary>
    /// 게임 시작
    /// </summary>
-   public void StartGame()
+   private void StartGame()
    {
+      //board 초기화
+      _board = new PlayerType[3, 3];
+      
+      //블럭 초기화
+      _blockController.InitBlocks();
+      
+      //InGameUI 초기화
+      _inGameUIController.SetGameUIMode(InGameUIController.GameUIMode.Init);
+      
+      //턴 시작
       SetTurn(TurnType.PlayerA);
    }
 
@@ -59,20 +73,6 @@ public class GameManager : K_Singleton<GameManager>
       }
    }
    
-   public void InitGame()
-   {
-      //board 초기화
-      _board = new PlayerType[3, 3];
-      
-      //블럭 초기화
-      _blockController.InitBlocks();
-      
-      //InGameUI 초기화
-      _inGameUIController.SetGameUIMode(InGameUIController.GameUIMode.Init);
-      
-      //GameStart
-      StartGame();
-   }
 
    /// <summary>
    /// _board에 새로운 값을 할당하는 함수
@@ -233,5 +233,16 @@ public class GameManager : K_Singleton<GameManager>
 
       //모든 경우에 해당하지 않을 때
       return false;
+   }
+
+   protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+   {
+      if (scene.name == "Game")
+      {
+         _blockController = GameObject.FindObjectOfType<BlockController>();
+         _inGameUIController = GameObject.FindObjectOfType<InGameUIController>();
+         
+         StartGame();
+      }
    }
 }

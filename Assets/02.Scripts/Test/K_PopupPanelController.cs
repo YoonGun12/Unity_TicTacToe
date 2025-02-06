@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class K_PopupPanelController : K_Singleton<K_PopupPanelController>
@@ -75,6 +76,10 @@ public class K_PopupPanelController : K_Singleton<K_PopupPanelController>
         }
 
     }
-    
-    
+
+
+    protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        throw new NotImplementedException();
+    }
 }
