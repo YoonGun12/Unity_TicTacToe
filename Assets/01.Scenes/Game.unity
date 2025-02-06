@@ -316,7 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.93333334, g: 0.93333334, b: 0.93333334, a: 1}
+  m_Color: {r: 0, g: 0.6509804, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -415,6 +415,7 @@ GameObject:
   - component: {fileID: 277251630}
   - component: {fileID: 277251627}
   - component: {fileID: 277251629}
+  - component: {fileID: 277251632}
   m_Layer: 5
   m_Name: GameUIPanel
   m_TagString: Untagged
@@ -434,6 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 899dbdec397234a4a8263ef53317817a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelRectTransform: {fileID: 0}
   canvasGroupA: {fileID: 266526145}
   canvasGroupB: {fileID: 824681983}
   gameOverButton: {fileID: 520199240}
@@ -523,6 +525,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277251626}
   m_CullTransparentMesh: 1
+--- !u!225 &277251632
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277251626}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &461072664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1134,7 +1148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.93333334, g: 0.93333334, b: 0.93333334, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.36862746, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

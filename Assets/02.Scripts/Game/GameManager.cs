@@ -49,6 +49,15 @@ public class GameManager : K_Singleton<GameManager>
       }
    }
    
+   public void OpenConfirmPanel(string message, ConfirmPanelController.OnConfirmButtonClick onConfirmButtonClick)
+   {
+      if (_canvas != null)
+      {
+         var confirmPanelObject = Instantiate(confirmPanel, _canvas.transform);
+         confirmPanelObject.GetComponent<ConfirmPanelController>().Show(message, onConfirmButtonClick);
+      }
+   }
+   
    /// <summary>
    /// 게임 시작
    /// </summary>

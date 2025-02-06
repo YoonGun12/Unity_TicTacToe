@@ -17,7 +17,7 @@ public class InGameUIController : PanelController
         GameOver
     }
 
-    private const float DisableAlpha = 0.5f;
+    private const float DisableAlpha = 0.2f;
     private const float EnableAlpha = 1f;
     
     public void SetGameUIMode(GameUIMode mode)
@@ -58,7 +58,10 @@ public class InGameUIController : PanelController
 
     public void OnClickGameOverButton()
     {
-        GameManager.Instance.ChangeToMainScene();
+        GameManager.Instance.OpenConfirmPanel("게임을 종료하시겠습니까?", () =>
+        {
+            GameManager.Instance.ChangeToMainScene();
+        });
     }
     
     /*public void SetTurnIconColor(GameManager.PlayerType playerType)

@@ -5,13 +5,17 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class MainPanelController : MonoBehaviour
 {
-    public TMP_Text titleText;
-    public float jumpHeight = 30f;  // 점프 높이
-    public float duration = 0.5f;   // 점프 시간
-    public float delayBetweenLetters = 0.1f;  // 글자별 딜레이
+    [SerializeField] private TMP_Text titleText;
+    [SerializeField] private float jumpHeight = 30f;  // 점프 높이
+    [SerializeField] private float duration = 0.5f;   // 점프 시간
+    [SerializeField] private float delayBetweenLetters = 0.1f;  // 글자별 딜레이
+
+    [SerializeField] private Image OImage;
+    [SerializeField] private Image XImage;
 
     private TMP_TextInfo textInfo;
 
