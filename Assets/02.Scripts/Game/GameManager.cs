@@ -13,6 +13,7 @@ public class GameManager : K_Singleton<GameManager>
    
    private BlockController _blockController;
    private InGameUIController _inGameUIController;
+   private Canvas _canvas;
 
    public enum PlayerType {None, PlayerA, PlayerB}
    private PlayerType[,] _board;
@@ -32,6 +33,20 @@ public class GameManager : K_Singleton<GameManager>
    public void ChangeToGameScene(GameType gameType)
    {
       SceneManager.LoadScene("Game");
+   }
+
+   public void ChangeToMainScene()
+   {
+      SceneManager.LoadScene("Main");
+   }
+
+   public void OpenSettingPanel()
+   {
+      if (_canvas != null)
+      {
+         var settingsPanelObject = Instantiate(settingsPanel, _canvas.transform);
+         settingsPanelObject.GetComponent<PanelController>().Show();
+      }
    }
    
    /// <summary>
@@ -239,10 +254,12 @@ public class GameManager : K_Singleton<GameManager>
    {
       if (scene.name == "Game")
       {
-         _blockController = GameObject.FindObjectOfType<BlockController>();
-         _inGameUIController = GameObject.FindObjectOfType<InGameUIController>();
+         _blockController = FindObjectOfType<BlockController>();
+         _inGameUIController = FindObjectOfType<InGameUIController>();
          
          StartGame();
       }
+
+      _canvas = FindObjectOfType<Canvas>();
    }
 }

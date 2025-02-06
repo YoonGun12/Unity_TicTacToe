@@ -58,7 +58,7 @@ public class InGameUIController : PanelController
 
     public void OnClickGameOverButton()
     {
-        //TODO: 게임 오버 구현
+        GameManager.Instance.ChangeToMainScene();
     }
     
     /*public void SetTurnIconColor(GameManager.PlayerType playerType)

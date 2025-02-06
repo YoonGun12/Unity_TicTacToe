@@ -80,6 +80,6 @@ public class K_PopupPanelController : K_Singleton<K_PopupPanelController>
 
     protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        throw new NotImplementedException();
+        
     }
 }

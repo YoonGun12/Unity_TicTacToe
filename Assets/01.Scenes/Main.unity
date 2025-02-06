@@ -311,6 +311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a10fbecc5e49d4eb9c012c23f9f767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settingsPanel: {fileID: 6346318836072406512, guid: a480bed95b24a444bbb3a2d4c77e9aa2, type: 3}
+  confirmPanel: {fileID: 6490592166146390009, guid: 82ef94104a9509a4e908e271ddc0f439, type: 3}
 --- !u!4 &445399176
 Transform:
   m_ObjectHideFlags: 0
@@ -1245,7 +1247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004bf09e83951104885d388787931a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tmpText: {fileID: 2573218011899824261}
+  titleText: {fileID: 2573218011899824261}
   jumpHeight: 150
   duration: 0.5
   delayBetweenLetters: 0.1

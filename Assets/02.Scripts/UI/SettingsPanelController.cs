@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SettingsPanelController : PanelController
 {
     /// <summary>
@@ -28,8 +29,8 @@ public class SettingsPanelController : PanelController
     /// X버튼 클릭시 호출되는 함수
     /// </summary>
     /// <param name="value">On/Off값</param>
-    public void Onclick()
+    public void OnclickCloseButton()
     {
-        
+        Hide();
     }
 }

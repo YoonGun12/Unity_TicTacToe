@@ -4,26 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 public class MainPanelController : MonoBehaviour
 {
-    public void OnClickSinglePlayButton()
-    {
-        GameManager.Instance.ChangeToGameScene(GameManager.GameType.SinglePlayer);
-    }
-    
-    public void OnClickDualPlayButton()
-    {
-        GameManager.Instance.ChangeToGameScene(GameManager.GameType.DualPlayer);
-    }
-    
-    public void OnClickSettingsButton()
-    {
-        
-    }
-    
-    
-    public TMP_Text tmpText;
+    public TMP_Text titleText;
     public float jumpHeight = 30f;  // 점프 높이
     public float duration = 0.5f;   // 점프 시간
     public float delayBetweenLetters = 0.1f;  // 글자별 딜레이
@@ -32,16 +17,16 @@ public class MainPanelController : MonoBehaviour
 
     void Start()
     {
-        if (tmpText == null)
-            tmpText = GetComponent<TMP_Text>();
+        if (titleText == null)
+            titleText = GetComponent<TMP_Text>();
 
-        textInfo = tmpText.textInfo;
+        textInfo = titleText.textInfo;
         StartCoroutine(AnimateJumpingText());
     }
 
     IEnumerator AnimateJumpingText()
     {
-        tmpText.ForceMeshUpdate(); // 텍스트 정보를 강제로 업데이트
+        titleText.ForceMeshUpdate(); // 텍스트 정보를 강제로 업데이트
         Vector3[] originalVertices = new Vector3[textInfo.meshInfo[0].vertices.Length];
 
         for (int i = 0; i < originalVertices.Length; i++)
@@ -72,7 +57,7 @@ public class MainPanelController : MonoBehaviour
                         vertices[vertexIndex + 1] += new Vector3(0, offset, 0);
                         vertices[vertexIndex + 2] += new Vector3(0, offset, 0);
                         vertices[vertexIndex + 3] += new Vector3(0, offset, 0);
-                        tmpText.UpdateVertexData(TMP_VertexDataUpdateFlags.Vertices);
+                        titleText.UpdateVertexData(TMP_VertexDataUpdateFlags.Vertices);
                     },
                     jumpHeight,
                     duration / 2
@@ -88,7 +73,7 @@ public class MainPanelController : MonoBehaviour
                             vertices[vertexIndex + 1] += new Vector3(0, offset, 0);
                             vertices[vertexIndex + 2] += new Vector3(0, offset, 0);
                             vertices[vertexIndex + 3] += new Vector3(0, offset, 0);
-                            tmpText.UpdateVertexData(TMP_VertexDataUpdateFlags.Vertices);
+                            titleText.UpdateVertexData(TMP_VertexDataUpdateFlags.Vertices);
                         },
                         0,
                         duration / 2
@@ -101,4 +86,20 @@ public class MainPanelController : MonoBehaviour
             yield return new WaitForSeconds(1f); // 한 번 끝난 후 다시 실행할 때 대기 시간
         }
     }
+    
+    public void OnClickSinglePlayButton()
+    {
+        GameManager.Instance.ChangeToGameScene(GameManager.GameType.SinglePlayer);
+    }
+    
+    public void OnClickDualPlayButton()
+    {
+        GameManager.Instance.ChangeToGameScene(GameManager.GameType.DualPlayer);
+    }
+    
+    public void OnClickSettingsButton()
+    {
+        GameManager.Instance.OpenSettingPanel();
+    }
+
 }

@@ -550,6 +550,7 @@ GameObject:
   - component: {fileID: 3758785206046466194}
   - component: {fileID: 9137957276573340372}
   - component: {fileID: 1842708400110489110}
+  - component: {fileID: 604019906490559785}
   m_Layer: 5
   m_Name: Settins Panel
   m_TagString: Untagged
@@ -627,6 +628,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f84c4dbf3bfab429533c83837157d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panelRectTransform: {fileID: 347824185281515698}
+--- !u!225 &604019906490559785
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346318836072406512}
+  m_Enabled: 1
+  m_Alpha: 0.34
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6706741984830658707
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,9 +847,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ConfirmPanelController, Assembly-CSharp
-        m_MethodName: OnClickCloseButton
+      - m_Target: {fileID: 1842708400110489110}
+        m_TargetAssemblyTypeName: SettingsPanelController, Assembly-CSharp
+        m_MethodName: OnclickCloseButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
