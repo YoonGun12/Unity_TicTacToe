@@ -165,7 +165,30 @@ public class GameManager : K_Singleton<GameManager>
          case TurnType.PlayerB:
             _inGameUIController.SetGameUIMode(InGameUIController.GameUIMode.TurnB);
             //inGameUIController.SetTurnIconColor(PlayerType.PlayerB); 턴 표시 방법2
-            _blockController.OnBlockClickedDelegate = (row, col) =>
+
+            //TODO: 계산된 row, col 값 AICONTROLLER
+
+            var result = AIController.FindNextMove(_board);
+
+            if (SetNewBoardValue(PlayerType.PlayerB, result.row, result.col))
+            {
+               var gameResult = CheckGameResult();
+               if (gameResult == GameResult.None)
+                  SetTurn(TurnType.PlayerA);
+               else
+               {
+                  EndGame(gameResult);
+               }
+
+            }
+            else
+            {
+               //TODO: 이미 있는 곳을 터치했을 때 처리
+            }
+
+
+            //2인 플레이
+            /*_blockController.OnBlockClickedDelegate = (row, col) =>
             {
                if (SetNewBoardValue(PlayerType.PlayerB, row, col))
                {
@@ -182,7 +205,7 @@ public class GameManager : K_Singleton<GameManager>
                {
                   //TODO: 이미 있는 곳을 터치했을 때 처리
                }
-            };
+            };*/
             break;
       }
    }
