@@ -168,9 +168,9 @@ public class GameManager : K_Singleton<GameManager>
 
             //TODO: 계산된 row, col 값 AICONTROLLER
 
-            var result = AIController.FindNextMove(_board);
+            var result = MinimaxAIController.GetBestMove(_board);
 
-            if (SetNewBoardValue(PlayerType.PlayerB, result.row, result.col))
+            if (SetNewBoardValue(PlayerType.PlayerB, result.Value.row, result.Value.col))
             {
                var gameResult = CheckGameResult();
                if (gameResult == GameResult.None)
@@ -216,14 +216,14 @@ public class GameManager : K_Singleton<GameManager>
    /// <returns>플레이어 기준 게임 결과</returns>
    private GameResult CheckGameResult()
    {
-      if (CheckGameWin(PlayerType.PlayerA)) {return GameResult.Win;}
-      if (CheckGameWin(PlayerType.PlayerB)) {return GameResult.Lose;}
-      if (IsAllBlocksPlaced()) {return GameResult.Draw;}
+      if (MinimaxAIController.CheckGameWin(PlayerType.PlayerA, _board)) {return GameResult.Win;}
+      if (MinimaxAIController.CheckGameWin(PlayerType.PlayerB, _board)) {return GameResult.Lose;}
+      if (MinimaxAIController.IsAllBlocksPlaced(_board)) {return GameResult.Draw;}
 
       return GameResult.None;
    }
    
-   /// <summary>
+   /*/// <summary>
    /// 모든 마커가 보드에 배치 되었는지 확인하는 함수
    /// </summary>
    /// <returns>True: 모두 배치</returns>
@@ -239,9 +239,9 @@ public class GameManager : K_Singleton<GameManager>
 
       }
       return true;
-   }
+   }*/
    
-   //게임의 승패를 판단하는 함수
+   /*//게임의 승패를 판단하는 함수
    private bool CheckGameWin(PlayerType playerType)
    {
       //가로로 마커가 일치하는지 확인
@@ -283,7 +283,7 @@ public class GameManager : K_Singleton<GameManager>
 
       //모든 경우에 해당하지 않을 때
       return false;
-   }
+   }*/
 
    protected override void OnSceneLoaded(Scene scene, LoadSceneMode mode)
    {

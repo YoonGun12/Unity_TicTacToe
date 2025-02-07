@@ -2,13 +2,13 @@
 using UnityEngine;
 public static class AIController 
 {
+    
     public static (int row, int col) FindNextMove(GameManager.PlayerType[,] board)
     {
         var emptyPoint = GameManager.PlayerType.None;
         var playerPoint = GameManager.PlayerType.PlayerA;
         var AIPoint = GameManager.PlayerType.PlayerB;
         
-        //TODO: board의 내용을 보고 다음 수를 계산 후 반환
         
         //승리가 가능한 자리가 있다면 두는 수
         //가로체크
