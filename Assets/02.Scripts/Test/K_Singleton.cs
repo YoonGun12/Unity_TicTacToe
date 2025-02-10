@@ -31,8 +31,6 @@ public abstract class K_Singleton<T> : MonoBehaviour where T : Component
         {
             _instance = this as T;
             DontDestroyOnLoad(gameObject);
-            OnSceneLoaded(SceneManager.GetActiveScene(), LoadSceneMode.Single);
-            
             //씬 전환시 호출되는 액션 메서드 할당
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
@@ -41,12 +39,7 @@ public abstract class K_Singleton<T> : MonoBehaviour where T : Component
             Destroy(gameObject);
         }
     }
-
-    private void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
+   
     protected abstract void OnSceneLoaded(Scene scene, LoadSceneMode mode);
 
 
