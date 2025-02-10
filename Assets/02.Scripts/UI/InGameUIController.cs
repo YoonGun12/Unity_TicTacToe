@@ -63,6 +63,19 @@ public class InGameUIController : PanelController
             GameManager.Instance.ChangeToMainScene();
         });
     }
+
+    public void OnClickSettingsButton()
+    {
+        GameManager.Instance.OpenSettingPanel();
+    }
+
+    public void OnClickBackButton()
+    {
+        GameManager.Instance.OpenConfirmPanel("게임을 종료하시겠습니까?", () =>
+        {
+            GameManager.Instance.ChangeToMainScene();
+        });
+    }
     
     /*public void SetTurnIconColor(GameManager.PlayerType playerType)
     {
