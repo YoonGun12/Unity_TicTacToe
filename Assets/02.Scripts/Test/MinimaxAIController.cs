@@ -6,6 +6,7 @@ using UnityEngine;
 
 public static class MinimaxAIController
 {
+    private static BlockController _blockController;
     public static (int row, int col)? GetBestMove(GameManager.PlayerType[,] board)
     {
         float bestScore = -1000;
@@ -128,6 +129,7 @@ public static class MinimaxAIController
         {
             if (board[0, col] == playerType && board[1, col] == playerType && board[2, col] == playerType)
             {
+                (int, int)[] blocks = { (0, col), (1, col), (2, col) };
                 return true;
             }
         }

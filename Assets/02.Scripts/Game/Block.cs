@@ -1,5 +1,7 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 [RequireComponent(typeof(SpriteRenderer))]
 public class Block : MonoBehaviour
 {
@@ -69,6 +71,10 @@ public class Block : MonoBehaviour
     //스스로 판단 x, 상위객체를 통해 관리
     private void OnMouseUpAsButton()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
         _onBlockClicked?.Invoke(_blockIndex);
     }
 }

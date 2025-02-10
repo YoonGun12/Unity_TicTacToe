@@ -21,7 +21,7 @@ public class SwitchController : MonoBehaviour
     public delegate void OnSwitchChangedDelegate(bool isOn);
     public OnSwitchChangedDelegate OnSwitchChanged;
 
-    private static readonly Color32 OnColor = new Color32(150, 150, 150, 255);
+    private static readonly Color32 OnColor = new Color32(255, 100, 150, 255);
     private static readonly Color32 OffColor = new Color32(90, 90, 90, 255);
     
     private void Awake()
