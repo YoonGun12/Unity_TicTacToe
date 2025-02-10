@@ -26,11 +26,11 @@ public class SwitchController : MonoBehaviour
     {
         if (isOn)
         {
-            _handleRectTransform.DOAnchorPosX(15, 0.5f);
+            _handleRectTransform.DOAnchorPosX(15, 0.2f);
         }
         else
         {
-            _handleRectTransform.DOAnchorPosX(-15, 0.5f);
+            _handleRectTransform.DOAnchorPosX(-15, 0.2f);
         }
 
         _isOn = isOn;
@@ -38,6 +38,6 @@ public class SwitchController : MonoBehaviour
 
     public void OnClickSwitch()
     {
-        SetOn(_isOn);
+        SetOn(!_isOn);
     }
 }
