@@ -36,7 +36,14 @@ public class GameManager : K_Singleton<GameManager>
 
    private void Start()
    {
-      OpenSigninPanel();
+      StartCoroutine(NetworkManager.Instance.GetScore((userInfo) =>
+      {
+         Debug.Log("자동 로그인 성공" + userInfo);
+      }, () =>
+      {
+         Debug.Log("자동 로그인 실패");
+         OpenSigninPanel();
+      }));
    }
 
    public void ChangeToGameScene(GameType gameType)

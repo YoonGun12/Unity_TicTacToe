@@ -133,4 +133,15 @@ public class MainPanelController : MonoBehaviour
         GameManager.Instance.OpenSettingPanel();
     }
 
+    public void OnClickScoreButton()
+    {
+        StartCoroutine(NetworkManager.Instance.GetScore((userInfo) =>
+        {
+            Debug.Log(userInfo);
+        }, () =>
+        {
+            // 로그인 화면 띄우기
+        }));
+    }
+
 }

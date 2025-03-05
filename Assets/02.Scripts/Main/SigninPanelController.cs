@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Networking;
+
 
 public struct SigninData
 {
@@ -13,6 +11,14 @@ public struct SigninData
 public struct SigninResult
 {
     public int result;
+}
+
+public struct ScoreResult
+{
+    public string id;
+    public string username;
+    public string nickname;
+    public int score;
 }
 
 public class SigninPanelController : MonoBehaviour
@@ -35,63 +41,26 @@ public class SigninPanelController : MonoBehaviour
         signinData.username = username;
         signinData.password = password;
 
-        StartCoroutine(Signin(signinData));
-    }
-
-    IEnumerator Signin(SigninData signinData)
-    {
-        string jsonString = JsonUtility.ToJson(signinData);
-        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonString);
-
-        using (UnityWebRequest www =
-               new UnityWebRequest(Constants.ServerURL + "/users/signin", UnityWebRequest.kHttpVerbPOST))
+        StartCoroutine(NetworkManager.Instance.Signin(signinData, () =>
         {
-            www.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            www.downloadHandler = new DownloadHandlerBuffer();
-            www.SetRequestHeader("Content-Type", "application/json");
-            
-            yield return www.SendWebRequest();
-
-            if (www.result == UnityWebRequest.Result.ConnectionError ||
-                www.result == UnityWebRequest.Result.ProtocolError)
+            Destroy(gameObject);
+        }, result =>
+        {
+            if (result == 0)
             {
-                
+                _usernameInputField.text = "";
             }
-            else
+            else if (result == 1)
             {
-                var resultString = www.downloadHandler.text;
-                var result = JsonUtility.FromJson<SigninResult>(resultString);
-
-                if (result.result == 0)
-                {
-                    //유저 네임이 유효하지 않음
-                    GameManager.Instance.OpenConfirmPanel("해당하는 유저네임이 없습니다.", () =>
-                    {
-                        _usernameInputField.text = "";
-                    });
-                }
-                else if (result.result == 1)
-                {
-                    //패스워드가 유효하지 않음
-                    GameManager.Instance.OpenConfirmPanel("패스워드가 틀렸습니다.", () =>
-                    {
-                        _passwordInputField.text = "";
-                    });
-                }
-                else if (result.result == 2)
-                {
-                    //성공
-                    GameManager.Instance.OpenConfirmPanel("로그인 성공하였습니다.", () =>
-                    {
-                        Destroy(gameObject);
-                    });
-                }
+                _passwordInputField.text = "";
             }
-        }
+        } ));
     }
+
+   
 
     public void OnClickSignupButton()
     {
-        
+        GameManager.Instance.OpenSignupPanel();
     }
 }
