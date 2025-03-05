@@ -10,6 +10,8 @@ public class GameManager : K_Singleton<GameManager>
 {
    [SerializeField] private GameObject settingsPanel;
    [SerializeField] private GameObject confirmPanel;
+   [SerializeField] private GameObject signinPanel;
+   [SerializeField] private GameObject signupPanel;
    
    private BlockController _blockController;
    private InGameUIController _inGameUIController;
@@ -30,7 +32,13 @@ public class GameManager : K_Singleton<GameManager>
 
    public enum GameType{SinglePlayer, DualPlayer}
    private GameType _gameType;
-   
+
+
+   private void Start()
+   {
+      OpenSigninPanel();
+   }
+
    public void ChangeToGameScene(GameType gameType)
    {
       _gameType = gameType;
@@ -57,6 +65,22 @@ public class GameManager : K_Singleton<GameManager>
       {
          var confirmPanelObject = Instantiate(confirmPanel, _canvas.transform);
          confirmPanelObject.GetComponent<ConfirmPanelController>().Show(message, onConfirmButtonClick);
+      }
+   }
+
+   public void OpenSigninPanel()
+   {
+      if (_canvas != null)
+      {
+         var signinPanelObject = Instantiate(signinPanel, _canvas.transform);
+      }
+   }
+
+   public void OpenSignupPanel()
+   {
+      if (_canvas != null)
+      {
+         var signupPanelObject = Instantiate(signupPanel, _canvas.transform);
       }
    }
    

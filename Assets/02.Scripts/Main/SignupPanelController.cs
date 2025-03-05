@@ -17,9 +17,7 @@ public class SignupPanelController : MonoBehaviour
     [SerializeField] private TMP_InputField _nicknameInputField;
     [SerializeField] private TMP_InputField _passwordInputField;
     [SerializeField] private TMP_InputField _confirmPasswordInputField;
-
-    private const string ServerURL = "http://localhost:3001";
-    
+   
     public void OnClickConfirmButton()
     {
         var username = _usernameInputField.text;
@@ -52,7 +50,7 @@ public class SignupPanelController : MonoBehaviour
         string jsonString = JsonUtility.ToJson(signupData);
         byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonString);
 
-        using (UnityWebRequest www = new UnityWebRequest(ServerURL + "/users/signup", UnityWebRequest.kHttpVerbPOST))
+        using (UnityWebRequest www = new UnityWebRequest(Constants.ServerURL + "/users/signup", UnityWebRequest.kHttpVerbPOST))
         {
             www.uploadHandler = new UploadHandlerRaw(bodyRaw);
             www.downloadHandler = new DownloadHandlerBuffer();
