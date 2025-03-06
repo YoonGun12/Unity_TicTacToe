@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -19,6 +20,20 @@ public struct ScoreResult
     public string username;
     public string nickname;
     public int score;
+}
+
+[Serializable]
+public struct ScoreInfo
+{
+    public string username;
+    public string nickname;
+    public int score;
+}
+
+[Serializable]
+public struct Scores
+{
+    public ScoreInfo[] scores;
 }
 
 public class SigninPanelController : MonoBehaviour
