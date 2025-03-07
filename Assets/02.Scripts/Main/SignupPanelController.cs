@@ -65,6 +65,6 @@ public class SignupPanelController : MonoBehaviour
 
     public void OnClickCancleButton()
     {
-        
+        Destroy(gameObject);
     }
 }

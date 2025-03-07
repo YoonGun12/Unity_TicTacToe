@@ -12,6 +12,7 @@ public class GameManager : K_Singleton<GameManager>
    [SerializeField] private GameObject confirmPanel;
    [SerializeField] private GameObject signinPanel;
    [SerializeField] private GameObject signupPanel;
+   [SerializeField] private GameObject leaderboardPanel;
    
    private BlockController _blockController;
    private InGameUIController _inGameUIController;
@@ -88,6 +89,14 @@ public class GameManager : K_Singleton<GameManager>
       if (_canvas != null)
       {
          var signupPanelObject = Instantiate(signupPanel, _canvas.transform);
+      }
+   }
+
+   public void OpenLeaderboardPanel()
+   {
+      if (_canvas != null)
+      {
+         var leaderboardPanelObject = Instantiate(leaderboardPanel, _canvas.transform);
       }
    }
    
