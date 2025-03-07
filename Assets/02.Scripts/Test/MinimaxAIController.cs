@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public static class MinimaxAIController
 {
@@ -11,6 +12,7 @@ public static class MinimaxAIController
     {
         float bestScore = -1000;
         (int row, int col) bestMove = (-1, -1);
+        List<(int row, int col)> possibleMoves = new List<(int row, int col)>();
         
         for (int row = 0; row < board.GetLength(0); row++)
         {
@@ -18,6 +20,8 @@ public static class MinimaxAIController
             {
                 if (board[row, col] == GameManager.PlayerType.None)
                 {
+                    possibleMoves.Add((row, col));
+                    
                     board[row, col] = GameManager.PlayerType.PlayerB;
                     var score = DoMinimax(board, 0, false);
                     board[row, col] = GameManager.PlayerType.None;
@@ -30,6 +34,14 @@ public static class MinimaxAIController
             }
         }
 
+        if (possibleMoves.Count == 0)
+            return null;
+
+        float mistakeChance = 0.3f;
+        if (Random.value < mistakeChance)
+        {
+            return possibleMoves[Random.Range(0, possibleMoves.Count)];
+        }
         if (bestMove != (-1, -1))
         {
             return (bestMove.row, bestMove.col);

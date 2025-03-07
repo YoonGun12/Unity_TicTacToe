@@ -14,6 +14,11 @@ public struct SigninResult
     public int result;
 }
 
+public struct ScoreData
+{
+    public int score;
+}
+
 public struct ScoreResult
 {
     public string id;

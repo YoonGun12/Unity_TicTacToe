@@ -142,6 +142,46 @@ public class NetworkManager : K_Singleton<NetworkManager>
             }
         }
     }
+    
+    public IEnumerator AddScore(int score, Action success, Action failure)
+    {
+        ScoreData scoreData = new ScoreData { score = score };
+        string jsonString = JsonUtility.ToJson(scoreData);
+        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonString);
+
+        using (UnityWebRequest www =
+               new UnityWebRequest(Constants.ServerURL + "/users/addscore", UnityWebRequest.kHttpVerbPOST))
+        {
+            www.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            www.downloadHandler = new DownloadHandlerBuffer();
+            www.SetRequestHeader("Content-Type", "application/json");
+
+            string sid = PlayerPrefs.GetString("sid", "");
+            if (!string.IsNullOrEmpty(sid))
+            {
+                www.SetRequestHeader("Cookie", sid);
+            }
+
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.ConnectionError ||
+                www.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.Log("Error:" + www.error);
+                failure?.Invoke();
+            }
+            else
+            {
+                var result = www.downloadHandler.text;
+                Debug.Log("Result: " + result);
+
+                GameManager.Instance.OpenConfirmPanel("승리! 점수 획득!", () =>
+                {
+                    success?.Invoke();
+                });
+            }
+        }
+    }
 
     public IEnumerator GetLeaderboard(Action<Scores> success, Action failure)
     {

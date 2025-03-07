@@ -123,6 +123,16 @@ public class GameManager : K_Singleton<GameManager>
       switch (gameResult)
       {
          case GameResult.Win:
+            if (_gameType == GameType.SinglePlayer)
+            {
+               StartCoroutine(NetworkManager.Instance.AddScore(10, () =>
+               {
+                  Debug.Log("서버에 점수 추가 완료");
+               }, () =>
+               {
+                  Debug.Log("서버에 점수 추가 실패");
+               }));
+            }
             break;
          case GameResult.Lose:
             break;
