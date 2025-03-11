@@ -39,17 +39,17 @@ public class BlockController : MonoBehaviour
     }
     
     
-    public void SetBlockColor(GameManager.PlayerType playerType, (int row, int col)[] blockPositions)
+    public void SetBlockColor(Constants.PlayerType playerType, (int row, int col)[] blockPositions)
     {
-        if (playerType == GameManager.PlayerType.None) return;
+        if (playerType == Constants.PlayerType.None) return;
 
         foreach (var blockPosition in blockPositions)
         {
             var blockIndex = blockPosition.row * 3 + blockPosition.col;
             Color32 markerColor;
-            if(playerType == GameManager.PlayerType.PlayerA)
+            if(playerType == Constants.PlayerType.PlayerA)
                 markerColor = new Color32(0, 166, 255, 255);
-            else if (playerType == GameManager.PlayerType.PlayerB)
+            else if (playerType == Constants.PlayerType.PlayerB)
                 markerColor = new Color32(255, 0, 94, 255);
             else
                 markerColor = Color.black;

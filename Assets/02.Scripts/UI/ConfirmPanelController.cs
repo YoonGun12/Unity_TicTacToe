@@ -15,6 +15,7 @@ public class ConfirmPanelController : PanelController
     {
         messageText.text = message;
         this.onConfirmButtonClick = onConfirmButtonClick;
+        base.Show();
     }
 
     /// <summary>
